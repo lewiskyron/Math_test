@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Math Game</title>
+    <!-- Include the script.js file -->
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <h2>User {{ user }}, solve the question:</h2>
+    <p>{{ question }}</p>
+    <p id="timer">Time: 0 seconds</p> <!-- Timer display -->
+    <form action="/submit_answer" method="post">
+        <input type="text" name="answer" required>
+        <input type="submit" value="Submit Answer">
+    </form>
+</body>
+</html>

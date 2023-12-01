@@ -6,9 +6,11 @@
 </head>
 <body>
     <h1>Game Over!</h1>
-    <p>Winner: {{ winner }}</p>
-    <p>User 1 Time: {{ user1_time }} seconds</p>
-    <p>User 2 Time: {{ user2_time }} seconds</p>
+    <h2>Winner: {{ winner }}</h2>
+    <h2>User 1 Time: {{ user1_time }} seconds</h2>
+    <h2>User 2 Time: {{ user2_time }} seconds</h2>
+    <h2>User 1 Correct Answers: {{ session['user1_correct_answers'] }}</h2>
+    <h2>User 2 Correct Answers: {{ session['user2_correct_answers'] }}</h2>
     <button onclick="window.location.href='/'">Play Again</button>
 </body>
 </html>

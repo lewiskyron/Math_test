@@ -23,12 +23,13 @@ def home():
 
 @app.route('/start_game', methods=['POST'])
 def start_game():
-    """ Route to initialize the game and redirect to the game page """
     session['user'] = 1
     session['round'] = 1
     session['start_time'] = time.time()
     session['questions'] = [generate_question() for _ in range(10)]
     session['current_question'] = 0
+    session['user1_correct_answers'] = 0  # Initialize for User 1
+    session['user2_correct_answers'] = 0  # Initialize for User 2
     return redirect(url_for('play_game'))
 
 @app.route('/play_game')
@@ -42,15 +43,20 @@ def play_game():
 
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer():
-    """ Route to handle the submission of answers """
     _, answer = session['questions'][session['current_question']]
-    user_answer = request.form['answer']
+    user_answer = float(request.form['answer'])
     session['current_question'] += 1
 
-    # Here you can add logic to check if the answer is correct
-    # For now, it just proceeds to the next question
+    # Update correct answer count based on user
+    if round(user_answer, 2) == round(answer, 2):
+        if session['user'] == 1:
+            session['user1_correct_answers'] += 1
+        else:
+            session['user2_correct_answers'] += 1
 
     return redirect(url_for('play_game'))
+
+
 
 @app.route('/end_round')
 def end_round():

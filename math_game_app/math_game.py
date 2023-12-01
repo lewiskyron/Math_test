@@ -3,11 +3,12 @@ import random
 import time
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Replace this with a secure secret key
+app.secret_key = "your_secret_key"  # Replace this with a secure secret key
+
 
 def generate_question():
-    """ Function to generate a random math question """
-    operations = ['+', '-', '*', '/']
+    """Function to generate a random math question"""
+    operations = ["+", "-", "*", "/"]
     num1 = random.randint(1, 10)
     num2 = random.randint(1, 10)
     operation = random.choice(operations)
@@ -15,14 +16,17 @@ def generate_question():
     answer = round(eval(question), 2)  # Round to 2 decimal places for division
     return question, answer
 
-@app.route('/')
-def home():
-    """ Route to serve the home page """
-    session.clear()  # Clear any existing session data
-    return render_template('home.html')
 
-@app.route('/start_game', methods=['POST'])
+@app.route("/")
+def home():
+    """Route to serve the home page"""
+    session.clear()  # Clear any existing session data
+    return render_template("home.html")
+
+
+@app.route("/start_game", methods=["POST"])
 def start_game():
+<<<<<<< HEAD
     session['user'] = 1
     session['round'] = 1
     session['start_time'] = time.time()
@@ -31,21 +35,39 @@ def start_game():
     session['user1_correct_answers'] = 0  # Initialize for User 1
     session['user2_correct_answers'] = 0  # Initialize for User 2
     return redirect(url_for('play_game'))
+=======
+    """Route to initialize the game and redirect to the game page"""
+    session["user"] = 1
+    session["round"] = 1
+    session["start_time"] = time.time()
+    session["questions"] = [generate_question() for _ in range(10)]
+    session["current_question"] = 0
+    return redirect(url_for("play_game"))
+>>>>>>> 5afbb08dc1a27e8fdfb26e95e092e2c461a6dac5
 
-@app.route('/play_game')
+
+@app.route("/play_game")
 def play_game():
-    """ Route to display the current math question """
-    if 'questions' not in session or session['current_question'] >= 10:
-        return redirect(url_for('end_round'))
+    """Route to display the current math question"""
+    if "questions" not in session or session["current_question"] >= 10:
+        return redirect(url_for("end_round"))
 
-    question, _ = session['questions'][session['current_question']]
-    return render_template('game.html', question=question, user=session['user'])
+    question, _ = session["questions"][session["current_question"]]
+    return render_template("game.html", question=question, user=session["user"])
 
-@app.route('/submit_answer', methods=['POST'])
+
+@app.route("/submit_answer", methods=["POST"])
 def submit_answer():
+<<<<<<< HEAD
     _, answer = session['questions'][session['current_question']]
     user_answer = float(request.form['answer'])
     session['current_question'] += 1
+=======
+    """Route to handle the submission of answers"""
+    _, answer = session["questions"][session["current_question"]]
+    user_answer = request.form["answer"]
+    session["current_question"] += 1
+>>>>>>> 5afbb08dc1a27e8fdfb26e95e092e2c461a6dac5
 
     # Update correct answer count based on user
     if round(user_answer, 2) == round(answer, 2):
@@ -54,11 +76,15 @@ def submit_answer():
         else:
             session['user2_correct_answers'] += 1
 
-    return redirect(url_for('play_game'))
+    return redirect(url_for("play_game"))
 
 
+<<<<<<< HEAD
 
 @app.route('/end_round')
+=======
+@app.route("/end_round")
+>>>>>>> 5afbb08dc1a27e8fdfb26e95e092e2c461a6dac5
 def end_round():
     elapsed_time = time.time() - session['start_time']
     if session['user'] == 1:
@@ -69,9 +95,15 @@ def end_round():
         session['questions'] = [generate_question() for _ in range(10)]
         return render_template('transition_to_user2.html')  # Show transition page
     else:
-        session['user2_time'] = elapsed_time
-        winner = "User 1" if session['user1_time'] < session['user2_time'] else "User 2"
-        return render_template('results.html', winner=winner, user1_time=session['user1_time'], user2_time=session['user2_time'])
+        session["user2_time"] = elapsed_time
+        winner = "User 1" if session["user1_time"] < session["user2_time"] else "User 2"
+        return render_template(
+            "results.html",
+            winner=winner,
+            user1_time=session["user1_time"],
+            user2_time=session["user2_time"],
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)

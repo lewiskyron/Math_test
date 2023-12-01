@@ -60,14 +60,14 @@ def submit_answer():
 
 @app.route("/end_round")
 def end_round():
-    """Route to handle the end of a round"""
-    elapsed_time = time.time() - session["start_time"]
-    if session["user"] == 1:
-        session["user1_time"] = elapsed_time
-        session["user"] = 2
-        session["start_time"] = time.time()
-        session["current_question"] = 0
-        return render_template("wait_for_user2.html")
+    elapsed_time = time.time() - session['start_time']
+    if session['user'] == 1:
+        session['user1_time'] = elapsed_time
+        session['user'] = 2
+        session['start_time'] = time.time()
+        session['current_question'] = 0
+        session['questions'] = [generate_question() for _ in range(10)]
+        return render_template('transition_to_user2.html')  # Show transition page
     else:
         session["user2_time"] = elapsed_time
         winner = "User 1" if session["user1_time"] < session["user2_time"] else "User 2"

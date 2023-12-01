@@ -26,7 +26,6 @@ def home():
 
 @app.route("/start_game", methods=["POST"])
 def start_game():
-<<<<<<< HEAD
     session['user'] = 1
     session['round'] = 1
     session['start_time'] = time.time()
@@ -35,15 +34,6 @@ def start_game():
     session['user1_correct_answers'] = 0  # Initialize for User 1
     session['user2_correct_answers'] = 0  # Initialize for User 2
     return redirect(url_for('play_game'))
-=======
-    """Route to initialize the game and redirect to the game page"""
-    session["user"] = 1
-    session["round"] = 1
-    session["start_time"] = time.time()
-    session["questions"] = [generate_question() for _ in range(10)]
-    session["current_question"] = 0
-    return redirect(url_for("play_game"))
->>>>>>> 5afbb08dc1a27e8fdfb26e95e092e2c461a6dac5
 
 
 @app.route("/play_game")
@@ -58,16 +48,9 @@ def play_game():
 
 @app.route("/submit_answer", methods=["POST"])
 def submit_answer():
-<<<<<<< HEAD
     _, answer = session['questions'][session['current_question']]
     user_answer = float(request.form['answer'])
     session['current_question'] += 1
-=======
-    """Route to handle the submission of answers"""
-    _, answer = session["questions"][session["current_question"]]
-    user_answer = request.form["answer"]
-    session["current_question"] += 1
->>>>>>> 5afbb08dc1a27e8fdfb26e95e092e2c461a6dac5
 
     # Update correct answer count based on user
     if round(user_answer, 2) == round(answer, 2):
@@ -79,12 +62,8 @@ def submit_answer():
     return redirect(url_for("play_game"))
 
 
-<<<<<<< HEAD
 
 @app.route('/end_round')
-=======
-@app.route("/end_round")
->>>>>>> 5afbb08dc1a27e8fdfb26e95e092e2c461a6dac5
 def end_round():
     elapsed_time = time.time() - session['start_time']
     if session['user'] == 1:

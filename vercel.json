@@ -1,0 +1,14 @@
+ {
+     "builds": [
+         {
+             "src": "api/math_game.py",
+             "use": "@vercel/python"
+         }
+     ],
+     "routes": [
+         {
+             "src": "/(.*)",
+             "dest": "api/math_game.py"
+         }
+     ]
+ }

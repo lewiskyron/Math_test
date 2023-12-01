@@ -2,7 +2,12 @@
 <html>
 <head>
     <title>Math Game</title>
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@200&family=Didact+Gothic&family=Dosis:wght@500&display=swap" rel="stylesheet">
     <script>
         function startUser2Game() {
             window.location.href = "/play_game";
@@ -10,8 +15,12 @@
     </script>
 </head>
 <body>
-    <h1>Thank you, User 1!</h1>
-    <p>Your turn is over. It's now User 2's turn.</p>
-    <button onclick="startUser2Game()">Start User 2's Turn</button>
+    <div class="container mt-5">
+        <div class="results-container rounded shadow p-4">
+            <h1>Thank you, User 1!</h1>
+            <p>Your turn is over. It's now User 2's turn.</p>
+            <button onclick="startUser2Game()" class="btn btn-primary">Start User 2's Turn</button>
+        </div>
+    </div>
 </body>
 </html>

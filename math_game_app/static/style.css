@@ -43,6 +43,14 @@ input[type="submit"]:hover {
     background-color: #004494;
 }
 
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+}
+
 #timer {
     margin-top: 20px;
     font-size: 1.2em;
@@ -54,6 +62,20 @@ input[type="submit"]:hover {
     flex-direction: column;
     align-items: center;
     width:100%;
+}
+
+
+.results-container {
+    background-color: #ffffff; /* White background */
+    max-width: 500px; /* Adjust width as needed */
+    margin: 0 auto; /* Center the box */
+    text-align: center; /* Center the text inside the box */
+}
+
+/* Optional: Further customization for button */
+button.btn {
+    width: 100%; /* Full width button */
+    margin-top: 20px; /* Space above the button */
 }
 
 .card {
